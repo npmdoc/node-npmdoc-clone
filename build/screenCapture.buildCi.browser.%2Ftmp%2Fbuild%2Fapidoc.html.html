@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/pvorb/node-clone#readme"
-
-    >clone (v2.1.1)</a>
+    <a href="https://github.com/pvorb/node-clone#readme">clone (v2.1.1)</a>
 </h1>
 <h4>deep cloning of objects and arrays</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.clone">module clone</a><ol>
 
@@ -140,7 +133,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function clone(parent, circular, depth, prototype, includeNonEnumerable) {
-  if (typeof circular === &#x27;object&#x27;) {
+  if (typeof circular === 'object') {
     depth = circular.depth;
     prototype = circular.prototype;
     includeNonEnumerable = circular.includeNonEnumerable;
@@ -151,15 +144,15 @@
   var allParents = [];
   var allChildren = [];
 
-  var useBuffer = typeof Buffer != &#x27;undefined&#x27;;
+  var useBuffer = typeof Buffer != 'undefined';
 
-  if (typeof circular == &#x27;undefined&#x27;)
+  if (typeof circular == 'undefined')
     circular = true;
 
-  if (typeof depth == &#x27;undefined&#x27;)
+  if (typeof depth == 'undefined')
     depth = Infinity;
 
-  // recurse this function so we don&#x27;t reset allParents and allChildren
+  // recurse this function so we don't reset allParents and allChildren
   function _clone(parent, depth) {
     // cloning null always returns null
     if (parent === null)
@@ -170,7 +163,7 @@
 
     var child;
     var proto;
-    if (typeof parent != &#x27;object&#x27;) {
+    if (typeof parent != 'object') {
       return parent;
     }
 
@@ -193,14 +186,14 @@
       if (parent.lastIndex) child.lastIndex = parent.lastIndex;
     } else if (clone.__isDate(parent)) {
       child = new Date(parent.getTime());
-    } else if (useBuffer &#x26;&#x26; Buffer.isBuffer(parent)) {
+    } else if (useBuffer &amp;&amp; Buffer.isBuffer(parent)) {
       child = new Buffer(parent.length);
       parent.copy(child);
       return child;
     } else if (_instanceof(parent, Error)) {
       child = Object.create(parent);
     } else {
-      if (typeof prototype == &#x27;undefined&#x27;) {
+      if (typeof prototype == 'undefined') {
         proto = Object.getPrototypeOf(parent);
         child = Object.create(proto);
       }
@@ -240,7 +233,7 @@
         attrs = Object.getOwnPropertyDescriptor(proto, i);
       }
 
-      if (attrs &#x26;&#x26; attrs.set == null) {
+      if (attrs &amp;&amp; attrs.set == null) {
         continue;
       }
       child[i] = _clone(parent[i], depth - 1);
@@ -248,12 +241,12 @@
 
     if (Object.getOwnPropertySymbols) {
       var symbols = Object.getOwnPropertySymbols(parent);
-      for (var i = 0; i &#x3c; symbols.length; i++) {
-        // Don&#x27;t need to worry about cloning a symbol because it is a primitive,
+      for (var i = 0; i &lt; symbols.length; i++) {
+        // Don't need to worry about cloning a symbol because it is a primitive,
         // like a number or string.
         var symbol = symbols[i];
         var descriptor = Object.getOwnPropertyDescriptor(parent, symbol);
-        if (descriptor &#x26;&#x26; !descriptor.enumerable &#x26;&#x26; !includeNonEnumerable) {
+        if (descriptor &amp;&amp; !descriptor.enumerable &amp;&amp; !includeNonEnumerable) {
           continue;
         }
         child[symbol] = _clone(parent[symbol], depth - 1);
@@ -267,10 +260,10 @@
 
     if (includeNonEnumerable) {
       var allPropertyNames = Object.getOwnPropertyNames(parent);
-      for (var i = 0; i &#x3c; allPropertyNames.length; i++) {
+      for (var i = 0; i &lt; allPropertyNames.length; i++) {
         var propertyName = allPropertyNames[i];
         var descriptor = Object.getOwnPropertyDescriptor(parent, propertyName);
-        if (descriptor &#x26;&#x26; descriptor.enumerable) {
+        if (descriptor &amp;&amp; descriptor.enumerable) {
           continue; ...</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -285,10 +278,10 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function __getRegExpFlags(re) {
-  var flags = &#x27;&#x27;;
-  if (re.global) flags += &#x27;g&#x27;;
-  if (re.ignoreCase) flags += &#x27;i&#x27;;
-  if (re.multiline) flags += &#x27;m&#x27;;
+  var flags = '';
+  if (re.global) flags += 'g';
+  if (re.ignoreCase) flags += 'i';
+  if (re.multiline) flags += 'm';
   return flags;
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
@@ -304,7 +297,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function __isArray(o) {
-  return typeof o === &#x27;object&#x27; &#x26;&#x26; __objToStr(o) === &#x27;[object Array]&#x27;;
+  return typeof o === 'object' &amp;&amp; __objToStr(o) === '[object Array]';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   child = new nativePromise(function (resolve, reject) {
@@ -321,7 +314,7 @@
   if (parent.lastIndex) child.lastIndex = parent.lastIndex;
 } else if (clone.__isDate(parent)) {
   child = new Date(parent.getTime());
-} else if (useBuffer &#x26;&#x26; Buffer.isBuffer(parent)) {
+} else if (useBuffer &amp;&amp; Buffer.isBuffer(parent)) {
 ...</pre></li>
     </ul>
 
@@ -335,7 +328,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function __isDate(o) {
-  return typeof o === &#x27;object&#x27; &#x26;&#x26; __objToStr(o) === &#x27;[object Date]&#x27;;
+  return typeof o === 'object' &amp;&amp; __objToStr(o) === '[object Date]';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
     });
@@ -347,7 +340,7 @@
   if (parent.lastIndex) child.lastIndex = parent.lastIndex;
 } else if (clone.<span class="apidocCodeKeywordSpan">__isDate</span>(parent)) {
   child = new Date(parent.getTime());
-} else if (useBuffer &#x26;&#x26; Buffer.isBuffer(parent)) {
+} else if (useBuffer &amp;&amp; Buffer.isBuffer(parent)) {
   child = new Buffer(parent.length);
   parent.copy(child);
   return child;
@@ -366,7 +359,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function __isRegExp(o) {
-  return typeof o === &#x27;object&#x27; &#x26;&#x26; __objToStr(o) === &#x27;[object RegExp]&#x27;;
+  return typeof o === 'object' &amp;&amp; __objToStr(o) === '[object RegExp]';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
       resolve(_clone(value, depth - 1));
@@ -381,7 +374,7 @@
   if (parent.lastIndex) child.lastIndex = parent.lastIndex;
 } else if (clone.__isDate(parent)) {
   child = new Date(parent.getTime());
-} else if (useBuffer &#x26;&#x26; Buffer.isBuffer(parent)) {
+} else if (useBuffer &amp;&amp; Buffer.isBuffer(parent)) {
   child = new Buffer(parent.length);
   parent.copy(child);
 ...</pre></li>
@@ -445,3 +438,4 @@ Does a prototype clone as
     ]
 </div>
 </div>
+</body></html>
